@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Creative Colorlib SignUp Form</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Custom Theme files -->
+<link href="{% static 'assets/css/bootstarp.css' %}" rel="stylesheet">
+<!-- //Custom Theme files -->
+<!-- web font -->
+<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+<!-- //web font -->
+</head>
+<body>
+	<!-- main -->
+	<div class="main-w3layouts wrapper">
+		<h1>Login Form</h1>
+		<h4 style="color:red"><center>{{msg}}</center></h4>
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+				<form action="{%url 'userlogin' %}" method="post">
+					{% csrf_token %}
+          <div class="mx-auto max-w-xs md-12">
+            <label class="control-label col-sm-3">Select Role<span class="text-danger">*</span></label>
+            <select class="form" name="role"style="background: #8DC26F" required>
+              <option></option>
+              <option required>Doctor</option>
+              <option required>Patient</option>
+            </select>
+            </label>
+          </div><br>
+
+					<input class="text email" type="email" name="email" placeholder="Email" required>
+					<input class="text" type="password" name="password" placeholder="Password" required>
+					
+					<input type="submit" value="SIGNUP">
+				</form>
+				<p>Don't have an Account? <a href="/signup"> SignUp  Now!</a></p>
+			</div>
+		</div>
+		<ul class="colorlib-bubbles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+	<!-- //main -->
+</body>
+</html>
