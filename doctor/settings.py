@@ -76,7 +76,12 @@ WSGI_APPLICATION = 'doctor.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'Doctor Finder',                      
+        'USER': 'postgres',
+        'PASSWORD': 'jatin',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
