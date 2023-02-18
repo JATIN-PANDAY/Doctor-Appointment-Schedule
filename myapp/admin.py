@@ -1,7 +1,5 @@
 from django.contrib import admin
-from myapp.models import Doctor
-from myapp.models import Patient
-from myapp.models import MasterTable
+from myapp.models import *
 
 
 
@@ -11,4 +9,6 @@ from myapp.models import MasterTable
 admin.site.register(Doctor)
 admin.site.register(Patient)
 admin.site.register(MasterTable)
+admin.site.register(contact)
+
 

@@ -25,7 +25,7 @@ class Patient(models.Model):
     bloodgroup=models.CharField(max_length=30,null=True)
     disease=models.CharField(max_length=100,null=True)
     gender=models.CharField(max_length=20,null=True)
-    contact=models.IntegerField(null=True)
+    contact=models.CharField(max_length=20,null=True)
     def __str__(self):
         return self.name
 
@@ -56,7 +56,10 @@ class Appointment(models.Model):
     # doctor=models.CharField(max_length=50,null=True)
     message=models.CharField(max_length=400,null=True)
     # date = models.DateField(null=True)
-   
+
+    def __str__(self):
+        return self.name
+
 
 
 # doctor send appointment schedule to patient
@@ -69,6 +72,9 @@ class doctorappointment(models.Model):
     appointment_time=models.CharField(max_length=10,null=True)
     address=models.CharField(max_length=200,null=True)
 
+    def __str__(self):
+        return self.name
+
     
 class PatientContact(models.Model):
     patient_id=models.ForeignKey(Patient,on_delete=models.CASCADE , default=0)
@@ -76,6 +82,9 @@ class PatientContact(models.Model):
     email=models.CharField(max_length=50,null=True)
     subject=models.CharField(max_length=100,null=True)
     message=models.CharField(max_length=300,null=True)
+    
+    def __str__(self):
+        return self.name
 
 
 class contact(models.Model):
@@ -83,3 +92,6 @@ class contact(models.Model):
     email=models.CharField(max_length=50,null=True)
     subject=models.CharField(max_length=100,null=True)
     message=models.CharField(max_length=300,null=True)
+   
+    def __str__(self):
+        return self.name

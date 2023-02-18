@@ -16,7 +16,7 @@ def message(request):
         subject=request.POST.get('subject')
         message=request.POST.get('message')
         message=contact.objects.create(name=name,email=email,subject=subject,message=message)
-        show_message='Your message sent...'
+        show_message='Your message send successfully ..'
         return render(request,'index.html',{'msg':show_message})
 
 
@@ -79,40 +79,41 @@ def login(request):
 # patient login
 
 def userlogin(request):
-    if request.POST['role']=='Patient':
-        email=request.POST['email']
-        password=request.POST['password']
-        user=MasterTable.objects.get(email=email)
-        if user:
-            if user.password==password and user.role=='Patient':
-                patient=Patient.objects.get(user_id=user)
-                request.session['id']=user.id
-                request.session['email']=user.email
-                request.session['password']=user.password
-                request.session['name']=patient.name
-                return redirect('patienthomepage')
-            else:
-                message='Incorrect Password !!!'
-                return render(request,'login.html',{'msg':message})
-    else:
-        if request.POST['role']=='Doctor':
+    try:
+        if request.POST['role']=='Patient':
             email=request.POST['email']
             password=request.POST['password']
             user=MasterTable.objects.get(email=email)
             if user:
-                if user.password==password and user.role=='Doctor':
-                    doctor=Doctor.objects.get(user_id=user)
+                if user.password==password and user.role=='Patient':
+                    patient=Patient.objects.get(user_id=user)
                     request.session['id']=user.id
                     request.session['email']=user.email
                     request.session['password']=user.password
-                    request.session['name']=doctor.name
-                    return render(request,'doctor/index.html',{'doct':doctor})
+                    request.session['name']=patient.name
+                    return redirect('patienthomepage')
                 else:
                     message='Incorrect Password !!!'
                     return render(request,'login.html',{'msg':message})
         else:
-            return HttpResponse('Error 404 Page')
-  
+            if request.POST['role']=='Doctor':
+                email=request.POST['email']
+                password=request.POST['password']
+                user=MasterTable.objects.get(email=email)
+                if user:
+                    if user.password==password and user.role=='Doctor':
+                        doctor=Doctor.objects.get(user_id=user)
+                        request.session['id']=user.id
+                        request.session['email']=user.email
+                        request.session['password']=user.password
+                        request.session['name']=doctor.name
+                        return render(request,'doctor/index.html',{'doct':doctor})
+                    else:
+                        message='Incorrect Password !!!'
+                        return render(request,'login.html',{'msg':message})
+    except Exception as e:
+            return render(request,'404.html')
+    
 # Patient homepage and doctor list
 
 def patienthomepage(request):
