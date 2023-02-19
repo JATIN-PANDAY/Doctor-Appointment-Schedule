@@ -38,7 +38,7 @@ class Doctor(models.Model):
     city=models.CharField(max_length=30,null=True)
     dob=models.CharField(max_length=20,null=True)
     pic=models.ImageField(upload_to='myapp/image/Doctor')
-    contact=models.IntegerField(null=True)
+    contact=models.CharField(max_length=12,null=True)
     qualification=models.CharField(max_length=40,null=True)
     Experience=models.CharField(max_length=100,null=True)
     Department=models.CharField(max_length=100,null=True)

@@ -258,20 +258,24 @@ def patientcheckdepartment(request,pk):
         return render(request,'checkdepartment.html')
 
 def patientshowappointment(request,pk):
-    user=MasterTable.objects.get(id=request.session['id'])
-    if user:
-        if user.role=='Patient':
-            patient=Patient.objects.get(user_id=user)
-            name=request.POST.get('name')
-            department=request.POST.get('department')
-            # appointment=Appointment.objects.get(name=name)
-            # if appointment:
-            appointment_schedule=doctorappointment.objects.get(department=department)
-            if appointment_schedule.department==department:
-                return render(request,'appointmentschedule.html',{'app_sch':appointment_schedule})
-            else:
-                message='Invalid input'
-                return render(request,'checkdepartment.html',{'msg':message})
+    try:
+        user=MasterTable.objects.get(id=request.session['id'])
+        if user:
+            if user.role=='Patient':
+                patient=Patient.objects.get(user_id=user)
+                name=request.POST.get('name')
+                department=request.POST.get('department')
+                
+                appointment_schedule=doctorappointment.objects.get(department=department)
+                if appointment_schedule.department==department and name==patient.name:
+                    return render(request,'appointmentschedule.html',{'app_sch':appointment_schedule})
+    except Exception as e:
+        message='No appointment in this department.'
+        return render(request,'checkdepartment.html',{'msg':message})
+
+
+    return render(request,'checkdepartment.html')
+
 
 
             
